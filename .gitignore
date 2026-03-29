@@ -1,0 +1,14 @@
+# Born2Math Root Gitignore
+# Only allow the 'app' folder and its relevant Next.js code
+
+/*
+!/app/
+!/.gitignore
+
+# Still ignore node_modules and env inside app
+app/node_modules
+app/.next
+app/.env*
+app/ts_errors.txt
+app/build_log.txt
+app/errors.txt
