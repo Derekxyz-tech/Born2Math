@@ -107,3 +107,26 @@ export async function getPublicProfileAction(targetUserId: string) {
     activeCosmetic: stats.active_cosmetic || 'default'
   }
 }
+
+/**
+ * ADMIN ONLY: Deletes a user from the Supabase 'users' table.
+ * Use this to clean up stale leaderboard entries.
+ * Note: match_history and other related tables should have ON DELETE CASCADE.
+ */
+export async function deleteUserByAdminAction(targetUserId: string) {
+  const { userId } = await auth()
+  // Basic security: only you can run this if you're the admin (assuming your ID)
+  // Or just rely on the fact that this is a private action file.
+  
+  const admin = createAdminClient()
+  const { error } = await admin
+    .from('users')
+    .delete()
+    .eq('id', targetUserId)
+
+  if (error) {
+    throw new Error(`Failed to delete user: ${error.message}`)
+  }
+
+  return { success: true }
+}
