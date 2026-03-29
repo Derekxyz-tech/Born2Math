@@ -1,14 +1,36 @@
-# Born2Math Root Gitignore
-# Only allow the 'app' folder and its relevant Next.js code
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-/*
-!/app/
-!/.gitignore
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# Still ignore node_modules and env inside app
-app/node_modules
-app/.next
-app/.env*
-app/ts_errors.txt
-app/build_log.txt
-app/errors.txt
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
