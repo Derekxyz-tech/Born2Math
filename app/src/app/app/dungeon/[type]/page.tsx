@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, use } from 'react'
 import { getProblemAction, submitAnswerAction } from '@/app/actions/mathActions'
 import { clearDungeonAction, fetchDungeonStateAction } from '@/app/actions/dungeonActions'
 import { getUserStatsAction } from '@/app/actions/userActions'
@@ -9,7 +9,8 @@ import { useRouter } from 'next/navigation'
 import { Skull, Timer, Crosshair, ArrowLeft, Heart } from 'lucide-react'
 import RankUpCinematic from '@/components/ui/RankUpCinematic'
 
-export default function DungeonArena({ params }: { params: { type: string } }) {
+export default function DungeonArena({ params }: { params: Promise<{ type: string }> }) {
+  const { type } = use(params)
   const router = useRouter()
   const [problem, setProblem] = useState<any>(null)
   const [answerInput, setAnswerInput] = useState('')
@@ -31,7 +32,7 @@ export default function DungeonArena({ params }: { params: { type: string } }) {
     speed: { target: 30, useTimer: true, initialTimer: 120, label: 'Speed Run', icon: <Timer/>, color: '#60C8FF' },
     accuracy: { target: 20, useLives: true, initialLives: 3, label: 'Accuracy Trial', icon: <Crosshair/>, color: '#FFB020' },
     boss: { target: 10, isBoss: true, label: 'Boss Combat', icon: <Skull/>, color: '#E82B2B' }
-  }[params.type] || { target: 999, label: 'Unknown Dungeon', icon: <Skull/>, color: '#FFF' }
+  }[type] || { target: 999, label: 'Unknown Dungeon', icon: <Skull/>, color: '#FFF' }
 
   const startTime = useRef<number>(0)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
@@ -42,7 +43,7 @@ export default function DungeonArena({ params }: { params: { type: string } }) {
       if (data) setUserRank(data.rank)
       // Strict Anti-Exploit Check: Has this matrix already been neutralized today?
       const currentState = await fetchDungeonStateAction()
-      if (currentState[params.type as keyof typeof currentState]) {
+      if (currentState[type as keyof typeof currentState]) {
         setCleared(true)
         setStatus('MATRIX ALREADY NEUTRALIZED TODAY. AWAIT MIDNIGHT RESET.')
       }
@@ -118,7 +119,7 @@ export default function DungeonArena({ params }: { params: { type: string } }) {
       if (newCount >= config.target) {
         setCleared(true)
         setStatus("ACCESSING MAINFRAME REWARDS...")
-        const clearRes = await clearDungeonAction(params.type as 'speed'|'accuracy'|'boss')
+        const clearRes = await clearDungeonAction(type as 'speed'|'accuracy'|'boss')
         setStatus(clearRes.message)
         if (clearRes.rankUp && clearRes.newRank) {
           setRankUpData({ newRank: clearRes.newRank, coinReward: clearRes.coinReward || 0 })
