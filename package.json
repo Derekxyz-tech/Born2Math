@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "video:preview": "cd video && npm run start",
+    "video:render": "cd video && npm run build",
     "start": "next start",
     "lint": "next lint"
   },

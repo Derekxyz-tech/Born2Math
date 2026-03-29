@@ -78,8 +78,8 @@ export default function LeaderboardDesktop() {
           Global <span className="text-[#E82B2B]">Rankings</span>
         </h1>
         
-        {/* Isolated Identity Tab */}
-        <div className="bg-[#18181A] rounded-[24px] px-8 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.02)] flex items-center gap-6 relative overflow-hidden group border border-[rgba(255,255,255,0.02)]">
+        {/* Isolated Identity Tab - Desktop Only */}
+        <div className="hidden lg:flex bg-[#18181A] rounded-[24px] px-8 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.02)] items-center gap-6 relative overflow-hidden group border border-[rgba(255,255,255,0.02)]">
           <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-[rgba(232,43,43,0.05)] to-transparent group-hover:from-[rgba(232,43,43,0.1)] transition-all"></div>
           <div className="flex flex-col">
             <span className="text-[#8888A0] text-[10px] font-bold tracking-widest uppercase mb-1">Your Division Rank</span>
@@ -150,7 +150,7 @@ export default function LeaderboardDesktop() {
         )}
 
         {/* LIST SECTION - Rounded Pills style */}
-        <div className="flex flex-col gap-3 px-2">
+        <div className="flex flex-col gap-3 px-2 pb-32 lg:pb-0">
           {rest.map((lb) => {
             const isMe = lb.user_id === userId
             
@@ -214,6 +214,38 @@ export default function LeaderboardDesktop() {
           })}
         </div>
 
+      </div>
+
+      {/* MOBILE STICKY RANK BAR */}
+      <div className="fixed bottom-0 left-0 right-0 lg:hidden p-4 z-50 pointer-events-none">
+        <div className="max-w-md mx-auto pointer-events-auto">
+          <div className="bg-[#111114]/80 backdrop-blur-xl border border-white/10 rounded-[32px] p-5 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] flex items-center justify-between overflow-hidden relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#E82B2B]/10 to-transparent opacity-50"></div>
+            
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 rounded-[20px] bg-[#E82B2B]/20 flex items-center justify-center text-[#E82B2B] shadow-[inset_0_0_15px_rgba(232,43,43,0.2)]">
+                <Trophy size={20} />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold tracking-widest uppercase text-[#8888A0] block mb-0.5">Your Ranking</span>
+                <span className="text-2xl font-mono font-black text-white leading-none">
+                  {myRank ? `#${myRank}` : 'Scouting...'}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end relative z-10">
+              <span className="text-[10px] font-bold tracking-widest uppercase text-[#E82B2B]">Division Active</span>
+              <div className="flex items-center gap-2 mt-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#E82B2B] animate-pulse"></div>
+                <span className="text-white text-xs font-black tracking-wider uppercase">Live Sync</span>
+              </div>
+            </div>
+            
+            {/* Glossy overlay effect */}
+            <div className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-25deg] group-hover:left-[100%] transition-all duration-1000 ease-in-out"></div>
+          </div>
+        </div>
       </div>
     </div>
   )

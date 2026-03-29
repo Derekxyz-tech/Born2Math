@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Target, Clock, AlertTriangle, ShieldAlert, Link } from 'lucide-react'
+import { Target, Clock, AlertTriangle, ShieldAlert, Link, LogOut } from 'lucide-react'
+import { SignOutButton } from '@clerk/nextjs'
 
 const COSMETICS_MAP: Record<string, string> = {
   'plate_crimson': '#E82B2B',
@@ -75,6 +76,16 @@ export default function ProfileDesktop() {
               <span className="text-[10px] font-bold tracking-widest uppercase group-hover:text-black flex gap-2"><Link size={14}/> {copying ? 'Coppied to Clipboard!' : 'Public Dossier URL'}</span>
               <span className="font-mono text-xs opacity-50 truncate max-w-[120px]">b2m.app/u/...</span>
             </button>
+
+            {/* Mobile-Only Logout Button */}
+            <div className="lg:hidden w-full mt-2">
+              <SignOutButton>
+                <button className="w-full bg-[#E82B2B]/10 border border-[#E82B2B]/20 hover:bg-[#E82B2B]/20 text-[#E82B2B] rounded-[24px] p-4 flex items-center justify-center gap-3 transition-all font-bold tracking-widest uppercase text-xs">
+                  <LogOut size={16} />
+                  Terminate Session (Log Out)
+                </button>
+              </SignOutButton>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-6">

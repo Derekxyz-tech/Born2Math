@@ -21,6 +21,8 @@ export default function SignUpPage() {
             identityPreviewText: "text-white",
             identityPreviewEditButtonIcon: "text-[#E82B2B]",
             formFieldInputShowPasswordButton: "text-[#8888A0]",
+            otpCodeFieldInput: "bg-[#0A0A0C] border-[#22222A] text-white focus:border-[#E82B2B] focus:ring-[#E82B2B] font-mono text-xl",
+            otpCodeField: "text-white",
             formFieldSuccessText: "text-[#00D97E] text-xs font-medium",
             formFieldInfoText: "text-[#8888A0] text-xs"
           },

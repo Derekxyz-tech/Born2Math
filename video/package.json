@@ -1,0 +1,24 @@
+{
+  "name": "born2math-video",
+  "version": "1.0.0",
+  "description": "Remotion video project for Born2Math rank-up animations",
+  "main": "src/Root.tsx",
+  "scripts": {
+    "start": "remotion preview src/index.tsx",
+    "build": "remotion render RankUp out.mp4",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "remotion": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/player": "^4.0.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "lucide-react": "^0.460.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "typescript": "^5.0.0"
+  }
+}
